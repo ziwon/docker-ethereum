@@ -5,7 +5,7 @@ LABEL maintainer="yngpil.yoon@gmail.com"
 WORKDIR /
 
 ENV GETH_VERSION v1.8.3
-ENV GETH_DATA_PATH "/testnet"
+ENV GETH_DATA_PATH "/chaindata"
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
