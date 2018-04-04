@@ -1,0 +1,4 @@
+ORG="${ORG:-ziwon}"
+NAME="${NAME:-docker-ethereum}"
+IMAGE_NAME="$ORG/$NAME"
+TAG="${TAG:-:latest}" && [ -n "$1" ] && TAG=:$1 && shift
