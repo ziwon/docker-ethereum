@@ -14,8 +14,5 @@ run:
 push:
 	@./scripts/push.sh $(TAG)
 
-console:
-	@./scripts/run.sh $(TAG) $(RUN)
 
-
-.PHONY: build clean run push console
+.PHONY: build clean run push

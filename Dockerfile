@@ -1,12 +1,6 @@
-FROM golang:1.9-stretch
+FROM golang:1.10 AS build-env
 
 LABEL maintainer="yngpil.yoon@gmail.com"
-
-WORKDIR /
-
-ENV GETH_VERSION v1.8.3
-ENV GETH_DATA_PATH "/chaindata"
-ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
     apt-get install -y \
@@ -16,14 +10,23 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+ENV GETH_VERSION v1.8.3
+ENV GETH_DATA_PATH "/chaindata"
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN mkdir /tmp/go-ethereum && \
     wget https://github.com/ethereum/go-ethereum/archive/$GETH_VERSION.tar.gz && \
     tar -xvf $GETH_VERSION.tar.gz -C /tmp/go-ethereum --strip-components=1 && \
     cd /tmp/go-ethereum && \
     make geth && \
-    cp build/bin/geth /usr/local/bin && \
-    cd - && \
+		cd - && \
     rm -rf $GETH_VERSION.tar.gz
+
+
+FROM alpine
+
+WORKDIR /
+COPY --from=build-env /tmp/go-ethereum/build/bin/geth /usr/local/bin
 
 COPY . .
 RUN chmod +x entrypoint.sh
