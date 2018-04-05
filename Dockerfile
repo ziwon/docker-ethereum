@@ -1,7 +1,5 @@
 FROM golang:1.10 AS build-env
-
-LABEL maintainer="yngpil.yoon@gmail.com"
-
+ENV GETH_VERSION v1.8.3
 RUN apt-get update && \
     apt-get install -y \
         software-properties-common \
@@ -9,10 +7,6 @@ RUN apt-get update && \
         wget && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-ENV GETH_VERSION v1.8.3
-ENV GETH_DATA_PATH "/chaindata"
-ENV DEBIAN_FRONTEND noninteractive
 
 RUN mkdir /tmp/go-ethereum && \
     wget https://github.com/ethereum/go-ethereum/archive/$GETH_VERSION.tar.gz && \
@@ -22,12 +16,12 @@ RUN mkdir /tmp/go-ethereum && \
 		cd - && \
     rm -rf $GETH_VERSION.tar.gz
 
-
-FROM alpine
-
+FROM bitnami/minideb:jessie
+LABEL maintainer="yngpil.yoon@gmail.com"
+ENV GETH_DATA_PATH "/chaindata"
+ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /
 COPY --from=build-env /tmp/go-ethereum/build/bin/geth /usr/local/bin
-
 COPY . .
-RUN chmod +x entrypoint.sh
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
