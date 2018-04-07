@@ -20,6 +20,8 @@ geth \
     --rpcaddr "0.0.0.0" \
     --rpcport 8545 \
     --rpccorsdomain "*" \
-    --rpcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"
+    --rpcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3" \
     --unlock 0 \
+    --password $PASSWORD \
     --verbosity 6
+    
