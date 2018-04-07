@@ -16,4 +16,10 @@ geth \
 	--maxpeers 1 \
 	--datadir $GETH_DATA_DIR \
 	--mine --minerthreads 1 \
-	--rpc
+	--rpc \
+    --rpcaddr "0.0.0.0" \
+    --rpcport 8545 \
+    --rpccorsdomain "*" \
+    --rpcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3"
+    --unlock 0 \
+    --verbosity 6
