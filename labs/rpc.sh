@@ -3,20 +3,18 @@
 PASSWORD="/labs/password"
 
 geth \
-	--testnet \
-	--datadir $GETH_DATA_DIR \
-	--password $PASSWORD \
-	account new
+    --datadir $GETH_DATA_DIR \
+    --password $PASSWORD \
+    account new
 
 geth \
-	--testnet \
-	--etherbase 0 \
-	--networkid 7777 \
-	--nodiscover \
-	--maxpeers 1 \
-	--datadir $GETH_DATA_DIR \
-	--mine --minerthreads 1 \
-	--rpc \
+    --etherbase 0 \
+    --networkid 7777 \
+    --nodiscover \
+    --maxpeers 1 \
+    --datadir $GETH_DATA_DIR \
+    --mine --minerthreads 1 \
+    --rpc \
     --rpcaddr "0.0.0.0" \
     --rpcport 8545 \
     --rpccorsdomain "*" \
@@ -24,4 +22,3 @@ geth \
     --unlock 0 \
     --password $PASSWORD \
     --verbosity 6
-    
