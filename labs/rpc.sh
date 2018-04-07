@@ -4,7 +4,7 @@ PASSWORD="/labs/password"
 
 geth \
 	--testnet \
-	--datadir $GETH_DATA_PATH \
+	--datadir $GETH_DATA_DIR \
 	--password $PASSWORD \
 	account new
 
@@ -14,6 +14,6 @@ geth \
 	--networkid 7777 \
 	--nodiscover \
 	--maxpeers 1 \
-	--datadir $GETH_DATA_PATH \
+	--datadir $GETH_DATA_DIR \
 	--mine --minerthreads 1 \
 	--rpc

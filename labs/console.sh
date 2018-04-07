@@ -8,7 +8,7 @@ init() {
 
 
 rinkeby() {
-    init 
+    init
 
     geth --rinkeby console
 }
@@ -16,13 +16,13 @@ rinkeby() {
 nopeers() {
     init
 
-    local network_id=7777
-    local max_peers=0
+    local networkid=7777
+    local maxpeers=0
 
     geth \
-        --networkid $network_id \
-        --nodiscover --maxpeers $max_peers \
-        --datadir $GETH_DATA_PATH \
+        --networkid $networkid \
+        --nodiscover --maxpeers $maxpeers \
+        --datadir $GETH_DATA_DIR \
         console
 }
 

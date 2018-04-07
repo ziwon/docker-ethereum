@@ -15,15 +15,14 @@ RUN mkdir /tmp/go-ethereum && \
     tar -xvf $GETH_VERSION.tar.gz -C /tmp/go-ethereum --strip-components=1 && \
     cd /tmp/go-ethereum && \
     make geth && \
-		cd - && \
+    cd - && \
     rm -rf $GETH_VERSION.tar.gz
 
 
 FROM bitnami/minideb:jessie
 LABEL maintainer="yngpil.yoon@gmail.com"
 
-ENV GETH_DATA_PATH "/chaindata"
-ENV DEBIAN_FRONTEND noninteractive
+ENV GETH_DATA_DIR "/chaindata"
 
 WORKDIR /
 COPY --from=build-env /tmp/go-ethereum/build/bin/geth /usr/local/bin
